@@ -15,9 +15,19 @@ export const exampleRouter = createTRPCRouter({
       };
     }),
 
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.example.findMany();
+  getSkills: publicProcedure.query(({ ctx }) => {
+    return ctx.prisma.skills.findMany();
   }),
+
+  addSkill: protectedProcedure
+    .input(z.object({ name: z.string() }))
+    .mutation(({ input, ctx }) => {
+      return ctx.prisma.skills.create({
+        data: {
+          name: input.name,
+        },
+      });
+    }),
 
   getSecretMessage: protectedProcedure.query(() => {
     return "you can now see this secret message!";

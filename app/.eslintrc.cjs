@@ -28,6 +28,7 @@ const config = {
         fixStyle: "inline-type-imports",
       },
     ],
+    "indent": ["warn", 2, { SwitchCase: 1 }],
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
   },
 };

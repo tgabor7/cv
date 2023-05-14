@@ -5,10 +5,12 @@ import { signIn, signOut } from "next-auth/react";
 import Button from './button';
 
 const Navbar: React.FC = () => {
-  const router = useRouter()
+  const router = useRouter();
+
   const active = (route: string) => {
     return router.pathname === route ? 'underline' : ''
   }
+  
   return (
     <nav>
       <ul className='flex pl-6 pr-6 bg-[#2e026d] text-white'>
@@ -26,8 +28,6 @@ const Navbar: React.FC = () => {
           <Button onClick={() => {
             signIn().then(() => {
               // router.push('/dashboard')
-              console.log('signed in');
-              
             }).catch((e) => {
               console.log(e)
             })

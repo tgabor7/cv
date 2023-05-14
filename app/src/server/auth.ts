@@ -45,6 +45,17 @@ export const authOptions: NextAuthOptions = {
         id: user.id,
       },
     }),
+    signIn: async ({ user }) => {
+      if (user) {
+        const { id, name, email, image } = user;
+        await prisma.user.upsert({
+          where: { id },
+          update: { name, email, image },
+          create: { id, name, email, image },
+        });
+      }
+      return true;
+    }
   },
   adapter: PrismaAdapter(prisma),
   providers: [

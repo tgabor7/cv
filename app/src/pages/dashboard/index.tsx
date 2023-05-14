@@ -1,12 +1,28 @@
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import Card from '~/components/card';
 import { api } from '~/utils/api';
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
+import { setUser } from '../main/store/store';
 
 const Dashboard: React.FC = () => {
 
   const hello = api.example.getSkills.useQuery();
+  
+  const main = useAppSelector((state) => state.main);
+  const dispatch = useAppDispatch();
+
+  console.log(main);
+
+  useEffect(() => {
+    dispatch(setUser({
+      name: 'test',
+      email: 'test',
+      image: 'test',
+      id: 'test',
+    }));
+  }, [dispatch]);
 
   return (
     <>
